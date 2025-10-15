@@ -1,4 +1,4 @@
-package dev.emmanuelotoo.todomanagementapi.security;
+package dev.emmanuelotoo.jwtdemo.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

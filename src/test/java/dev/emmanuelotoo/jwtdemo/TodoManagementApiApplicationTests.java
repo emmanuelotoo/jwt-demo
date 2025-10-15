@@ -1,4 +1,4 @@
-package dev.emmanuelotoo.todomanagementapi;
+package dev.emmanuelotoo.jwtdemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

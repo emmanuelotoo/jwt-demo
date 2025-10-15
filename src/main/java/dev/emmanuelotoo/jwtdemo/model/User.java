@@ -1,4 +1,4 @@
-package dev.emmanuelotoo.todomanagementapi.model;
+package dev.emmanuelotoo.jwtdemo.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

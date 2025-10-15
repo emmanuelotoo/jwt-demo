@@ -1,7 +1,7 @@
-package dev.emmanuelotoo.todomanagementapi.service;
+package dev.emmanuelotoo.jwtdemo.service;
 
-import dev.emmanuelotoo.todomanagementapi.model.User;
-import dev.emmanuelotoo.todomanagementapi.repository.UserRepository;
+import dev.emmanuelotoo.jwtdemo.model.User;
+import dev.emmanuelotoo.jwtdemo.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

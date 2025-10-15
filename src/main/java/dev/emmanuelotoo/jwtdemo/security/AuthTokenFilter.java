@@ -1,6 +1,6 @@
-package dev.emmanuelotoo.todomanagementapi.security;
+package dev.emmanuelotoo.jwtdemo.security;
 
-import dev.emmanuelotoo.todomanagementapi.service.CustomerUserDetailsService;
+import dev.emmanuelotoo.jwtdemo.service.CustomerUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

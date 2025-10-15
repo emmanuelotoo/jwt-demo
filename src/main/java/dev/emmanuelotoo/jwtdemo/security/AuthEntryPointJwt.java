@@ -1,4 +1,4 @@
-package dev.emmanuelotoo.todomanagementapi.security;
+package dev.emmanuelotoo.jwtdemo.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

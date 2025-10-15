@@ -1,6 +1,6 @@
-package dev.emmanuelotoo.todomanagementapi.security;
+package dev.emmanuelotoo.jwtdemo.security;
 
-import dev.emmanuelotoo.todomanagementapi.service.CustomerUserDetailsService;
+import dev.emmanuelotoo.jwtdemo.service.CustomerUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

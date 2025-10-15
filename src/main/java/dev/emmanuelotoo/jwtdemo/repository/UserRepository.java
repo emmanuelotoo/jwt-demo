@@ -1,6 +1,6 @@
-package dev.emmanuelotoo.todomanagementapi.repository;
+package dev.emmanuelotoo.jwtdemo.repository;
 
-import dev.emmanuelotoo.todomanagementapi.model.User;
+import dev.emmanuelotoo.jwtdemo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
