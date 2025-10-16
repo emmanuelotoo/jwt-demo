@@ -85,11 +85,12 @@ public class AuthController {
                         return ResponseEntity.badRequest().body("Refresh token expired. Please login again");
                     }
                     String newJwt = jwtUtil.generateToken(token.getUser().getEmail());
-                    return ResponseEntity.ok(Map.of("token", newJwt));
+                    return ResponseEntity.ok(Map.of("New Access token", newJwt));
                 })
                 .orElse(ResponseEntity.badRequest().body("Invalid refresh token"));
     }
 
+    @PostMapping("/logout")
     public ResponseEntity<?> logoutUser(@RequestBody Map<String, String> payload) {
         String requestToken = payload.get("refreshToken");
 
@@ -100,9 +101,9 @@ public class AuthController {
         return refreshTokenRepository.findByToken(requestToken)
                 .map(token -> {
                     refreshTokenRepository.delete(token);
-                    return ResponseEntity.ok("Deleted successfully");
+                    return ResponseEntity.ok("Logged out successfully");
                 })
-                .orElse(ResponseEntity.badRequest().body("Refresh token required"));
+                .orElse(ResponseEntity.badRequest().body("Invalid Refresh token"));
     }
 
 
