@@ -6,10 +6,10 @@ import lombok.*;
 
 @Entity
 @Table(name = "_user")
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
