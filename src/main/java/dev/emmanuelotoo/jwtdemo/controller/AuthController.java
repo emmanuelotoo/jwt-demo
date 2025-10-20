@@ -6,6 +6,7 @@ import dev.emmanuelotoo.jwtdemo.repository.RefreshTokenRepository;
 import dev.emmanuelotoo.jwtdemo.repository.UserRepository;
 import dev.emmanuelotoo.jwtdemo.security.JwtUtil;
 import dev.emmanuelotoo.jwtdemo.service.RefreshTokenService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,7 +39,7 @@ public class AuthController {
         this.refreshTokenRepository = refreshTokenRepository;
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/sign-in")
     public Map<String, String> authenticateUser(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -60,9 +61,11 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public String registerUser(@RequestBody User user) {
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
-            return "Error: Already exists";
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("Email already exists");
         }
         // Creating a new user's account
         User newUser = new User(
@@ -72,20 +75,29 @@ public class AuthController {
                 encoder.encode(user.getPassword())
         );
         userRepository.save(newUser);
-        return "User registered successfully";
+        return ResponseEntity.ok("User registered successfully");
     }
 
     @PostMapping("/refresh")
     public ResponseEntity<?> refreshToken(@RequestBody Map<String, String> payload) {
         String requestToken = payload.get("refreshToken");
+
         return refreshTokenRepository.findByToken(requestToken)
                 .map(token -> {
                     if (refreshTokenService.isTokenExpired(token)) {
                         refreshTokenRepository.delete(token);
                         return ResponseEntity.badRequest().body("Refresh token expired. Please login again");
                     }
-                    String newJwt = jwtUtil.generateToken(token.getUser().getEmail());
-                    return ResponseEntity.ok(Map.of("New Access token", newJwt));
+
+                    // Delete old refresh token
+                    refreshTokenRepository.delete(token);
+
+                    String newAccessToken = jwtUtil.generateToken(token.getUser().getEmail());
+                    String newRefreshToken = refreshTokenService.createRefreshToken(token.getUser().getId()).getToken();
+
+                    return ResponseEntity.ok(Map.of
+                            ("New Access token", newAccessToken
+                            , "New Refresh token", newRefreshToken));
                 })
                 .orElse(ResponseEntity.badRequest().body("Invalid refresh token"));
     }
@@ -105,9 +117,4 @@ public class AuthController {
                 })
                 .orElse(ResponseEntity.badRequest().body("Invalid Refresh token"));
     }
-
-
-
-
-
 }
