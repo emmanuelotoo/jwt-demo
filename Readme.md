@@ -8,17 +8,6 @@ A RESTful API built with Spring Boot 3.5.6 that demonstrates JWT (JSON Web Token
 - **Java 21**
 - **Maven**
 
-## How to Run
-
-### Prerequisites
-
-Before running the application, ensure you have the following installed:
-
-- Java Development Kit (JDK) 21 or higher
-- Maven 3.6+ (or use the included Maven wrapper)
-- PostgreSQL 12 or higher
-
-
 ### Running the Application
 
 1. Clone the repository:
